@@ -1,5 +1,5 @@
 # USB Keyboard Sniffer Device
-
+![enter image description here](https://github.com/bbas121/UsbKeyboardSniffer/blob/main/logo.jpg?raw=true)
 ## Personal Reflection
 
 This project was to apply the knowledge I gained from an STM32 USB drivers course, combined with my prior experience with STM32  in general, as well as my experience with the ESP32 from past projects. Initially, I thought it would be a fast project to complete; however, it demanded an entire week of effort. Despite this, the result is very good. I am convinced that by designing a custom PCB and utilizing a single STM32 equipped with dual USB modules, it's possible to create a much more compact device.
