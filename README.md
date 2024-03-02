@@ -27,6 +27,7 @@ This device offers several key features:
 
 # Web server
 The web server is configured with a static IP address: 192.618.1.184. On its homepage, there's a description of its capabilities along with several interactive buttons:
+
 ![enter image description here](https://i.ibb.co/YL9R3TW/home-Page-1-80-1.webp)
 ## Show TXT File - Capture keystrokes in realtime 
 On this page, you can see in real-time raw keyboard input as text with an option to download the Txt file and clear the file.
@@ -44,6 +45,7 @@ On this page, you can input keystrokes that will be transmitted to the host PC. 
 ![enter image description here](https://i.ibb.co/QH9DdzG/Key-Injection.jpg)
 ## Activate Rick Roll
 That button will press Start + R button to open the run window and type "chrome youtube.com/watch?v=dQw4w9WgXcQ" to open  "Rick Astley - Never Gonna Give You Up" in Youtube on the host PC
+
 ![enter image description here](https://i.ibb.co/VMyvpmW/RickRoll.jpg)
 
 ## Hardware
