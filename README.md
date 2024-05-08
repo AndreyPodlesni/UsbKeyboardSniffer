@@ -42,7 +42,7 @@ On this page, you have the ability to configure the internal RTC (Real Time Cloc
 ![enter image description here](https://i.ibb.co/KGFVT1k/SetTime.jpg)
 ## Key injection
 On this page, you can input keystrokes that will be transmitted to the host PC. It supports sending only one key at a time, including control keys. To send a control key in combination with another key, you must select the checkbox corresponding to the control key.
-![enter image description here](https://i.ibb.co/QH9DdzG/Key-Injection.jpg)
+![enter image description here](https://i.ibb.co/PD4N6wq/Key-Injection.jpg)
 ## Activate Rick Roll
 That button will press Start + R button to open the run window and type "chrome youtube.com/watch?v=dQw4w9WgXcQ" to open  "Rick Astley - Never Gonna Give You Up" in Youtube on the host PC
 
