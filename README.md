@@ -17,7 +17,7 @@ This device offers several key features:
 -   Real-time monitoring of keyboard inputs as text.
 -   Storage of raw input data on an SD card, with the information saved in a text file that can be easily downloaded.
 -   The ability to view the entire keyboard HID (Human Interface Device) structure in real-time, including up to six characters that can be pressed simultaneously, along with the status of control keys (Ctrl, Shift, Start, Alt) and a timestamp featuring the date and time.
--   An option to download the complete HID structure data in CSV format. That is stored in a memory card
+-   An option to download the complete Key Log HID structure data in CSV format. That is stored in a memory card
 -   Capability to set the internal real-time clock and date of the controller.
 -   Remote key injection feature, allowing the user to send keystrokes to the host computer from afar.
 -   A "rick roll" button designed for practical jokes, which opens the music video for Rick Astley's "Never Gonna Give You Up" on the remote computer.
@@ -33,12 +33,12 @@ The web server is configured with a static IP address: 192.618.1.184. On its hom
 On this page, you can see in real-time raw keyboard input as text with an option to download the Txt file and clear the file.
 ![enter image description here](https://i.ibb.co/bXswWFx/ShowTxt.jpg)
 
-## Show CSV file  - Display the full HID key structure
+## Show key log stored in CSV file  - Display the full HID key structure
 The HID (Human Interface Device) structure includes six keys in addition to control keys. Each keystroke is captured and logged in a CSV format, complete with timestamps that mark the date and time. The control keys consist of Shift, Ctrl, Alt, and the Start button. Additionally, special keys, such as Tab, Caps Lock, and Space, are recognized as ASCII keys that are not control keys.
 ![enter image description here](https://i.ibb.co/Y3cpkrt/ShowCSV.jpg)
 
-## Set Time For CSV TimeStamp
-On this page, you have the ability to configure the internal RTC (Real Time Clock) of the ESP32 with the desired time and date to be used in the CSV time and date stamp.
+## Set Time For key log TimeStamp
+On this page, you have the ability to configure the internal RTC (Real Time Clock) of the ESP32 with the desired time and date to be used in the key log  time and date stamp.
 ![enter image description here](https://i.ibb.co/KGFVT1k/SetTime.jpg)
 ## Key injection
 On this page, you can input keystrokes that will be transmitted to the host PC. It supports sending only one key at a time, including control keys. To send a control key in combination with another key, you must select the checkbox corresponding to the control key.
@@ -105,7 +105,7 @@ The ESP32 utilizes the SD_MMC library for managing the memory card and the FS li
 -   Conversely, if both Caps Lock is active and the Shift key is pressed, ASCII letters are converted to lowercase.
 
 
-## Recording the Complete HID Structure in a CSV File
+## Recording the Complete HID Structure keylog in a CSV File
 
 -   The ESP32 leverages the ESP32Time library to utilize the real-time clock.
 -   When the keystroke structure is received, the ESP32 converts each HID key into its ASCII equivalent and records each element of the structure in a CSV format, storing it on the memory card within the "key_info.csv" file.
@@ -118,8 +118,8 @@ The ESP32 utilizes the SD_MMC library for managing the memory card and the FS li
 
 The ESP32 employs the WebServer library to establish and manage a web server for presenting the webpage. Additionally, it utilizes the ArduinoJson library for handling JSON data within the server's operations.
 
-## Displaying Text and CSV Files on a Web Page
-The web server fetches the text and CSV files from the memory card and displays them on a web page. It uses JavaScript to dynamically refresh the content, ensuring up-to-date information is shown.
+## Displaying Text and  key log CSV Files on a Web Page
+The web server fetches the text and CSV key log files from the memory card and displays them on a web page. It uses JavaScript to dynamically refresh the content, ensuring up-to-date information is shown.
 
 
 ## Key Injection Feature
